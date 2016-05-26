@@ -12,14 +12,12 @@ typedef enum{
     modoTimer,
     modoInter
   }mode;
+  
 
 void onState(LiquidCrystal &lcd);
-/* just testing passing objects by
- ref in functions */
-void test(LiquidCrystal &lcd)
-{
-  lcd.print("test"); 
-}
+void offState(LiquidCrystal &lcd);
+void timerState(LiquidCrystal &lcd);
+void intermitenState(LiquidCrystal &lcd);
 
 
 void offState(LiquidCrystal &lcd)
@@ -30,9 +28,13 @@ void offState(LiquidCrystal &lcd)
 
 void timerState(LiquidCrystal &lcd)
 {
-   button btn = NONE;
- lcd.clear();
- lcd.print("modo timer");
+  unsigned int time_m = 30;
+  unsigned long time_ms = (unsigned long)time_m * 60 * 1000;
+  button btn = NONE;
+  lcd.clear();
+  lcd.print("modo timer");
+  lcd.setCursor(0,1);
+  lcd.print(time_m);
   while(btn == NONE)
   {
     btn = read_LCD_buttons(); 
@@ -45,6 +47,17 @@ void timerState(LiquidCrystal &lcd)
     case DOWN:
       vfnpState = &offState;
       break;
+    case SELECT:
+      // start timer
+      /*TODO  add relay control*/
+      //lcd.print(" select");
+      for(unsigned int i=0; i<time_m; i++)
+      {
+        lcd.setCursor(0,1);
+        lcd.print(--time_m);
+        delay(60000);
+        
+      }
     default:
       break;
   }

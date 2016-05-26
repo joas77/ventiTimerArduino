@@ -17,7 +17,6 @@ void setup()
 {
  lcd.begin(16, 2);              // start the library
  lcd.setCursor(0,0);
- lcd.print("Push "); // print a simple message
  //test(lcd);
  onState(lcd);
 }
