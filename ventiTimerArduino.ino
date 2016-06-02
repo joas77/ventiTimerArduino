@@ -13,17 +13,18 @@ const int pin_d7 = 7; // arduino pin wired to LCD d8
 
 LiquidCrystal lcd( pin_RS,  pin_EN,  pin_d4,  pin_d5,  pin_d6,  pin_d7);
 
+
 void setup()
 {
- lcd.begin(16, 2);              // start the library
- lcd.setCursor(0,0);
- //test(lcd);
- onState(lcd);
+	lcd.begin(16, 2);              // start the library
+	lcd.setCursor(0,0);
+	onState(lcd);
+	//timerState(lcd);
 }
  
 void loop()
 {
-  
+	//testButtons(lcd);
 }
 
 

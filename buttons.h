@@ -1,6 +1,7 @@
 #ifndef _BUTTONS_H
   #define _BUTTONS_H
 // define some values used by the panel and buttons
+#include <LiquidCrystal.h>
 
 
 typedef enum butttons {
@@ -11,6 +12,37 @@ typedef enum butttons {
   SELECT,
   NONE
   }button;
+
+button read_LCD_buttons();
+button getButton();
+void testButtons(LiquidCrystal &lcd);
+
+
+void testButtons(LiquidCrystal &lcd)
+{
+	switch(read_LCD_buttons())
+	{
+		case UP:
+			lcd.clear();
+			lcd.print("UP");
+			break;
+		case DOWN:
+			lcd.clear();
+			lcd.print("DOWN");
+			break;
+		case LEFT:
+			lcd.clear();
+			lcd.print("LEFT");
+			break;
+		case RIGHT:
+			lcd.clear();
+			lcd.print("RIGHT");
+			break;
+		default:
+			break;
+
+	}
+}
 
 // read the buttons
 button read_LCD_buttons()
@@ -38,5 +70,21 @@ button read_LCD_buttons()
  return NONE;  // when all others fail, return this...
 }
 
+button getButton()
+{
+	button btn = NONE;
+	button tmp;
+	while(btn == NONE) 
+	{
+		tmp = read_LCD_buttons();
+		delay(150);
+		if(tmp == read_LCD_buttons())
+		{
+			btn = tmp;
+		}
+		else{ /*Do nothing*/}
+	}
+	return btn;
+}
 #endif
 
